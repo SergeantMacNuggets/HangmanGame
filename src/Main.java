@@ -3,12 +3,12 @@ import java.awt.*;
 
 class Window extends JFrame {
     Window() {
-        this.setLayout(new GridLayout(2,0));
+        this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800,800);
         this.setResizable(false);
-        this.add(new Scene());
-        this.add(new KeyboardLayout());
+        this.add(new Scene(),BorderLayout.CENTER);
+        this.add(new KeyboardLayout(),BorderLayout.SOUTH);
         this.setVisible(true);
 
     }
