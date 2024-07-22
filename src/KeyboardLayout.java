@@ -6,9 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class KeyboardLayout extends JPanel implements ActionListener {
-    JButton[] keys = new JButton[26];
-
+    private final JButton[] keys = new JButton[26];
+    GuessWord hiddenWord;
     KeyboardLayout() {
+        hiddenWord = new GuessWord();
         this.setLayout(new GridLayout(2,2));
         this.setPreferredSize(new Dimension(800,200));
         this.setKeys();
@@ -29,7 +30,7 @@ class KeyboardLayout extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Clicked");
-
+        JButton specificButton = (JButton) e.getSource();
+        hiddenWord.ifContains(specificButton.getText());
     }
 }

@@ -10,7 +10,6 @@ class Window extends JFrame {
         this.add(new Scene(),BorderLayout.CENTER);
         this.add(new KeyboardLayout(),BorderLayout.SOUTH);
         this.setVisible(true);
-
     }
 }
 
