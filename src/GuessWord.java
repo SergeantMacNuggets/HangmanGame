@@ -14,7 +14,7 @@ class GuessWord extends JPanel {
         guess.setFont(new Font("Arial", Font.BOLD, 34));
         guess.setForeground(Color.WHITE);
         mistakes = 7;
-        secretWord = "CHICKEN";
+        secretWord = "BASKETBALL";
         this.blankWord();
         replaceBlank = blank.toCharArray();
         guess.setText(String.valueOf(replaceBlank));
@@ -30,25 +30,41 @@ class GuessWord extends JPanel {
 
     public void ifContains(String l) {
         int charPos;
+        int[] numofDuplicate;
         if(secretWord.contains(l)) {
-            System.out.println(numberofDuplicate(secretWord,l.charAt(0)));
             charPos = secretWord.indexOf(l);
-            //charPos = (secretWord.indexOf(l) == 0) ? charPos : charPos+1;
-            replaceBlank[charPos] = l.charAt(0);
-            System.out.println(String.valueOf(replaceBlank));
+            numofDuplicate = indexOfDuplicate(secretWord,l.charAt(0));
+            if(numofDuplicate[0] == 0) {
+
+                replaceBlank[charPos] = l.charAt(0);
+            }
+            else {
+                replaceBlank[charPos] = l.charAt(0);
+                this.replaceLetters(numofDuplicate,secretWord,l.charAt(0));
+            }
         }
+        System.out.println(String.valueOf(replaceBlank));
         guess.setText(String.valueOf(replaceBlank));
     }
 
-    public static int numberofDuplicate(String word,char d) {
-        int numofDuplicate = 1;
+    public void replaceLetters(int[] index,String word,char d) {
+        for (int i= 0; i<index[0];i++) {
+            replaceBlank[index[i+1]] = d;
+        }
+    }
+
+    public static int[] indexOfDuplicate(String word,char d) {
+        int[] index = new int[word.length()];
         char[] wordArray = word.toCharArray();
-        for(int i=word.indexOf(d)+1; i<wordArray.length;i++) {
+        int numofDuplicates = 0;
+        for(int i=word.indexOf(d),x=1; i<wordArray.length;i++) {
             if(wordArray[i] == d) {
-                numofDuplicate++;
+                index[0] = numofDuplicates;
+                index[x] = i;
+                numofDuplicates++;
             }
         }
-        return numofDuplicate;
+        return index;
     }
 
 
