@@ -1,5 +1,5 @@
 import javax.swing.JFrame;
-import java.awt.*;
+import java.awt.BorderLayout;
 
 class Window extends JFrame {
     Window() {

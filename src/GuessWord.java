@@ -15,7 +15,7 @@ class GuessWord extends JPanel {
         guess.setFont(new Font("Arial", Font.BOLD, 34));
         guess.setForeground(Color.WHITE);
         mistakes = 7;
-        secretWord = "BASKETBALL";
+        secretWord = "VOLLEYBALL";
         this.blankWord();
         replaceBlank = blank.toCharArray();
         guess.setText(String.valueOf(replaceBlank));
@@ -25,7 +25,7 @@ class GuessWord extends JPanel {
 
     private void blankWord() {
         for(int i=0; i<secretWord.length();i++) {
-            blank += "_";
+            blank += "-";
         }
     }
 
@@ -39,20 +39,16 @@ class GuessWord extends JPanel {
         if(ifContains(l)) {
             charPos = secretWord.indexOf(l);
             numofDuplicate = indexOfDuplicate(secretWord,l.charAt(0));
-            if(numofDuplicate[0] == 0) {
                 replaceBlank[charPos] = l.charAt(0);
-            }
-            else {
-                replaceBlank[charPos] = l.charAt(0);
-                this.replaceLetters(numofDuplicate,secretWord,l.charAt(0));
-            }
+                if(numofDuplicate[0] > 0)
+                    this.replaceLetters(numofDuplicate,secretWord,l.charAt(0));
         }
         guess.setText(String.valueOf(replaceBlank));
     }
 
     private void replaceLetters(int[] index,String word,char d) {
-        for (int i= 0; i<index[0];i++) {
-            replaceBlank[index[i+1]] = d;
+        for (int i = 0,j=1; i<=index[0] && index[j] != 0;j++,i++) {
+            replaceBlank[index[j]] = d;
         }
     }
 
@@ -61,9 +57,10 @@ class GuessWord extends JPanel {
         char[] wordArray = word.toCharArray();
         int numofDuplicates = 0;
         for(int i=word.indexOf(d),x=1; i<wordArray.length;i++) {
+            index[0] = numofDuplicates;
             if(wordArray[i] == d) {
-                index[0] = numofDuplicates;
                 index[x] = i;
+                x++;
                 numofDuplicates++;
             }
         }
