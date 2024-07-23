@@ -1,7 +1,6 @@
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.GridLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,6 +30,6 @@ class KeyboardLayout extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton specificButton = (JButton) e.getSource();
-        hiddenWord.ifContains(specificButton.getText());
+        hiddenWord.gameState(specificButton);
     }
 }

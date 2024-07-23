@@ -1,5 +1,6 @@
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 import java.awt.*;
 
 class GuessWord extends JPanel {
@@ -10,7 +11,7 @@ class GuessWord extends JPanel {
     private char[] replaceBlank;
     GuessWord() {
         blank = "";
-        guess = new JLabel("");
+        guess = new JLabel();
         guess.setFont(new Font("Arial", Font.BOLD, 34));
         guess.setForeground(Color.WHITE);
         mistakes = 7;
@@ -28,14 +29,17 @@ class GuessWord extends JPanel {
         }
     }
 
-    public void ifContains(String l) {
+    private boolean ifContains(String l) {
+        return secretWord.contains(l);
+    }
+
+    private void totalReplace(String l) {
         int charPos;
         int[] numofDuplicate;
-        if(secretWord.contains(l)) {
+        if(ifContains(l)) {
             charPos = secretWord.indexOf(l);
             numofDuplicate = indexOfDuplicate(secretWord,l.charAt(0));
             if(numofDuplicate[0] == 0) {
-
                 replaceBlank[charPos] = l.charAt(0);
             }
             else {
@@ -43,17 +47,16 @@ class GuessWord extends JPanel {
                 this.replaceLetters(numofDuplicate,secretWord,l.charAt(0));
             }
         }
-        System.out.println(String.valueOf(replaceBlank));
         guess.setText(String.valueOf(replaceBlank));
     }
 
-    public void replaceLetters(int[] index,String word,char d) {
+    private void replaceLetters(int[] index,String word,char d) {
         for (int i= 0; i<index[0];i++) {
             replaceBlank[index[i+1]] = d;
         }
     }
 
-    public static int[] indexOfDuplicate(String word,char d) {
+    private static int[] indexOfDuplicate(String word,char d) {
         int[] index = new int[word.length()];
         char[] wordArray = word.toCharArray();
         int numofDuplicates = 0;
@@ -65,6 +68,36 @@ class GuessWord extends JPanel {
             }
         }
         return index;
+    }
+
+    private void healthBar(int mistakes) {
+        if(mistakes == 0)
+            youLose();
+        else if(String.valueOf(replaceBlank).equals(secretWord))
+            youWin();
+    }
+
+    private static void youWin() {
+        System.out.println("You Win");
+    }
+
+    private static void youLose() {
+        System.out.println("You Lose");
+    }
+
+    public void gameState(JButton b) {
+        if(this.ifContains(b.getText())) {
+            this.totalReplace(b.getText());
+            b.setBackground(Color.GREEN);
+            b.setEnabled(false);
+        }
+        else {
+            b.setBackground(Color.RED);
+            mistakes--;
+            b.setEnabled(false);
+        }
+        System.out.println(String.valueOf(replaceBlank) + " " + mistakes);
+        this.healthBar(mistakes);
     }
 
 
