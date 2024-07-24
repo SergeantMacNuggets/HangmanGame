@@ -5,6 +5,7 @@ import java.awt.*;
 
 class GuessWord extends JPanel {
     JLabel guess;
+    Words word;
     private final String secretWord;
     private int mistakes;
     private String blank;
@@ -12,10 +13,11 @@ class GuessWord extends JPanel {
     GuessWord() {
         blank = "";
         guess = new JLabel();
+        word = new Country();
         guess.setFont(new Font("Arial", Font.BOLD, 34));
         guess.setForeground(Color.WHITE);
         mistakes = 7;
-        secretWord = "VOLLEYBALL";
+        secretWord = word.getWord();
         this.blankWord();
         replaceBlank = blank.toCharArray();
         guess.setText(String.valueOf(replaceBlank));
