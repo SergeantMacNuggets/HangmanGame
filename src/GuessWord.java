@@ -53,7 +53,6 @@ class GuessWord extends JPanel {
         int y = 0;
         y = (index[1] == 0) ? y + 1: y;
         for (int i = 0; i<=index[0] && index[(i+1)+y] != 0; i++) {
-            System.out.println("index[j] = " + index[(i+1) + y]);
             replaceBlank[index[(i+1)+y]] = d;
         }
     }
