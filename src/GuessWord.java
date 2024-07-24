@@ -43,13 +43,13 @@ class GuessWord extends JPanel {
             numofDuplicate = indexOfDuplicate(secretWord, l.charAt(0));
             replaceBlank[charPos] = l.charAt(0);
             if (numofDuplicate[0] != 0) {
-                this.replaceLetters(numofDuplicate, secretWord, l.charAt(0));
+                this.replaceLetters(numofDuplicate, l.charAt(0));
             }
         }
         guess.setText(String.valueOf(replaceBlank));
     }
 
-    private void replaceLetters(int[] index,String word,char d) {
+    private void replaceLetters(int[] index,char d) {
         int y = 0;
         y = (index[1] == 0) ? y + 1: y;
         for (int i = 0; i<=index[0] && index[(i+1)+y] != 0; i++) {
