@@ -17,7 +17,7 @@ class GuessWord extends JPanel {
         guess.setFont(new Font("Arial", Font.BOLD, 34));
         guess.setForeground(Color.WHITE);
         mistakes = 7;
-        secretWord = "PHILIPPINES";
+        secretWord = word.getWord();
         this.blankWord();
         replaceBlank = blank.toCharArray();
         guess.setText(String.valueOf(replaceBlank));
