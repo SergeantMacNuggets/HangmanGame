@@ -17,7 +17,7 @@ class GuessWord extends JPanel {
         guess.setFont(new Font("Arial", Font.BOLD, 34));
         guess.setForeground(Color.WHITE);
         mistakes = 7;
-        secretWord = word.getWord();
+        secretWord = "PHILIPPINES";
         this.blankWord();
         replaceBlank = blank.toCharArray();
         guess.setText(String.valueOf(replaceBlank));
@@ -40,17 +40,21 @@ class GuessWord extends JPanel {
         int[] numofDuplicate;
         if(ifContains(l)) {
             charPos = secretWord.indexOf(l);
-            numofDuplicate = indexOfDuplicate(secretWord,l.charAt(0));
-                replaceBlank[charPos] = l.charAt(0);
-                if(numofDuplicate[0] > 0)
-                    this.replaceLetters(numofDuplicate,secretWord,l.charAt(0));
+            numofDuplicate = indexOfDuplicate(secretWord, l.charAt(0));
+            replaceBlank[charPos] = l.charAt(0);
+            if (numofDuplicate[0] != 0) {
+                this.replaceLetters(numofDuplicate, secretWord, l.charAt(0));
+            }
         }
         guess.setText(String.valueOf(replaceBlank));
     }
 
     private void replaceLetters(int[] index,String word,char d) {
-        for (int i = 0,j=1; i<=index[0] && index[j] != 0;j++,i++) {
-            replaceBlank[index[j]] = d;
+        int y = 0;
+        y = (index[1] == 0) ? y + 1: y;
+        for (int i = 0; i<=index[0] && index[(i+1)+y] != 0; i++) {
+            System.out.println("index[j] = " + index[(i+1) + y]);
+            replaceBlank[index[(i+1)+y]] = d;
         }
     }
 
