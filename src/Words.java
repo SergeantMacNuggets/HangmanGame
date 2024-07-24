@@ -1,11 +1,11 @@
 import java.util.Random;
 
 abstract class Words {
-    String[] word = new String[5];
     public abstract String getWord();
 }
 
 class Sport extends Words {
+    private final String[] word = new String[5];
     Sport() {
         word[0] = "BASKETBALL";
         word[1] = "VOLLEYBALL";
@@ -19,6 +19,7 @@ class Sport extends Words {
 }
 
 class Food extends Words {
+    private final String[] word = new String[5];
     Food() {
         word[0] = "CHICKEN";
         word[1] = "STEAK";
@@ -32,6 +33,7 @@ class Food extends Words {
 }
 
 class Job extends Words {
+    private final String[] word = new String[5];
     Job() {
         word[0] = "JANITOR";
         word[1] = "MANAGER";
@@ -46,6 +48,7 @@ class Job extends Words {
 }
 
 class Animals extends Words {
+    private final String[] word = new String[5];
     Animals() {
         word[0] = "GIRAFFE";
         word[1] = "ELEPHANT";
@@ -59,6 +62,7 @@ class Animals extends Words {
 }
 
 class Country extends Words {
+    private final String[] word = new String[5];
     Country() {
         word[0] = "AMERICA";
         word[1] = "SPAIN";
