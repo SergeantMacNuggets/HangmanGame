@@ -44,7 +44,6 @@ class Job extends Words {
     public String getWord() {
         return word[new Random().nextInt(word.length)];
     }
-
 }
 
 class Animals extends Words {

@@ -1,10 +1,9 @@
 import javax.swing.JPanel;
-import javax.swing.JLabel;
 import javax.swing.JButton;
-import java.awt.*;
+import java.awt.Color;
+
 
 class GuessWord extends JPanel {
-    JLabel guess;
     Words word;
     private final String secretWord;
     private int mistakes;
@@ -12,23 +11,21 @@ class GuessWord extends JPanel {
     private char[] replaceBlank;
     GuessWord() {
         blank = "";
-        guess = new JLabel();
         word = new Country();
-        guess.setFont(new Font("Arial", Font.BOLD, 34));
-        guess.setForeground(Color.WHITE);
-        mistakes = 7;
+        mistakes = 6;
         secretWord = word.getWord();
         this.blankWord();
         replaceBlank = blank.toCharArray();
-        guess.setText(String.valueOf(replaceBlank));
-        this.setBackground(Color.BLUE);
-        this.add(guess);
     }
 
     private void blankWord() {
         for(int i=0; i<secretWord.length();i++) {
             blank += "-";
         }
+    }
+
+    public String getBlank() {
+        return String.valueOf(replaceBlank);
     }
 
     private boolean ifContains(String l) {
@@ -46,7 +43,6 @@ class GuessWord extends JPanel {
                 this.replaceLetters(numofDuplicate, l.charAt(0));
             }
         }
-        guess.setText(String.valueOf(replaceBlank));
     }
 
     private void replaceLetters(int[] index,char d) {
@@ -87,22 +83,34 @@ class GuessWord extends JPanel {
         System.out.println("You Lose");
     }
 
-    public void gameState(JButton b) {
+    public boolean validity(JButton b) {
         if(this.ifContains(b.getText())) {
             this.totalReplace(b.getText());
-            b.setBackground(Color.GREEN);
-            b.setEnabled(false);
+            this.healthBar(mistakes);
+//            b.setBackground(Color.GREEN);
+//            b.setEnabled(false);
+            System.out.println(String.valueOf(replaceBlank) + " " + mistakes);
+            return true;
+
         }
-        else {
-            b.setBackground(Color.RED);
-            mistakes--;
-            b.setEnabled(false);
-        }
+//            b.setBackground(Color.RED);
         System.out.println(String.valueOf(replaceBlank) + " " + mistakes);
+        mistakes--;
+//            b.setEnabled(false);
         this.healthBar(mistakes);
+        return false;
     }
 
+    public int getMistakes() {
+        return mistakes;
+    }
 
+    public boolean checkGameState() {
+        return String.valueOf(replaceBlank).equals(secretWord) || mistakes == 0;
+    }
+    public boolean checkWin() {
+        return String.valueOf(replaceBlank).equals(secretWord);
+    }
 
 }
 
