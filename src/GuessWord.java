@@ -1,19 +1,18 @@
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.Color;
 
 
 class GuessWord extends JPanel {
-    Words word;
+    Words missingWord;
     private final String secretWord;
     private int mistakes;
     private String blank;
     private char[] replaceBlank;
-    GuessWord() {
+    GuessWord(Words missingWord) {
+        this.missingWord = missingWord;
         blank = "";
-        word = new Country();
         mistakes = 6;
-        secretWord = word.getWord();
+        secretWord = missingWord.getWord();
         this.blankWord();
         replaceBlank = blank.toCharArray();
     }
@@ -68,36 +67,13 @@ class GuessWord extends JPanel {
         return index;
     }
 
-    private void healthBar(int mistakes) {
-        if(mistakes == 0)
-            youLose();
-        else if(String.valueOf(replaceBlank).equals(secretWord))
-            youWin();
-    }
-
-    private static void youWin() {
-        System.out.println("You Win");
-    }
-
-    private static void youLose() {
-        System.out.println("You Lose");
-    }
-
     public boolean validity(JButton b) {
         if(this.ifContains(b.getText())) {
             this.totalReplace(b.getText());
-            this.healthBar(mistakes);
-//            b.setBackground(Color.GREEN);
-//            b.setEnabled(false);
-            System.out.println(String.valueOf(replaceBlank) + " " + mistakes);
             return true;
 
         }
-//            b.setBackground(Color.RED);
-        System.out.println(String.valueOf(replaceBlank) + " " + mistakes);
         mistakes--;
-//            b.setEnabled(false);
-        this.healthBar(mistakes);
         return false;
     }
 

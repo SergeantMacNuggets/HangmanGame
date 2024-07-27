@@ -1,30 +1,48 @@
 import javax.swing.*;
-import java.awt.*;
+import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import javax.sound.sampled.*;
+import java.io.File;
 
 class KeyboardLayout extends JPanel implements ActionListener {
     private final JButton[] keys = new JButton[26];
-    ActionListener keyListener;
-    GuessWord hiddenWord;
-    ImageIcon[] icon;
-    WordDisplay display;
-    int y=0;
-    Man man;
-    KeyboardLayout() {
-        icon = new ImageIcon[6];
-        hiddenWord = new GuessWord();
+    private ActionListener keyListener;
+    private GuessWord hiddenWord;
+    private ImageIcon[] sprites;
+    private WordDisplay display;
+    private AudioInputStream audioIn;
+    private final File sound;
+    private Clip clip;
+    private int y=1;
+    private Man man;
+    KeyboardLayout(GuessWord hiddenWord) {
+        sound = new File("src/Sounds/Correct.wav");
+        this.hiddenWord = hiddenWord;
         display = new WordDisplay();
         man = new Man();
+        sprites = man.getSprites();
         this.setLayout(new GridLayout(2,2));
         this.setPreferredSize(new Dimension(600,100));
-        setSprites();
         setKeys();
         addKeys();
         display.blanks.setText(hiddenWord.getBlank());
     }
-    public void setKeys() {
+
+    private void playSound() {
+        try {
+            audioIn = AudioSystem.getAudioInputStream(sound);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+        } catch (Exception e) {
+            System.out.println("Audio file cannot be found");
+        }
+        clip.start();
+    }
+
+    private void setKeys() {
         int ascii = 65;
         for(int i=0; i<keys.length;i++) {
             keys[i] = new JButton(Character.toString((char) ascii));
@@ -32,9 +50,12 @@ class KeyboardLayout extends JPanel implements ActionListener {
             ascii++;
         }
     }
-    public void addKeys() {
-        for(JButton b: keys)
+    private void addKeys() {
+        for(JButton b: keys) {
+            b.setBackground(Color.BLACK);
+            b.setForeground(Color.yellow);
             this.add(b);
+        }
     }
 
     public WordDisplay getDisplay() {
@@ -45,39 +66,29 @@ class KeyboardLayout extends JPanel implements ActionListener {
         return man;
     }
 
-    public void buttonState(JButton b) {
+    private void buttonState(JButton b) {
         if(hiddenWord.validity(b)) {
             b.setBackground(Color.GREEN);
+            playSound();
             b.setEnabled(false);
         }
         else {
-            man.miss.setText(Integer.toString(hiddenWord.getMistakes()));
-            man.background.setIcon(icon[y]);
+            man.background.setIcon(sprites[y]);
             b.setBackground(Color.RED);
             b.setEnabled(false);
             y++;
         }
     }
 
-    public void setSprites() {
-        icon[0] = new ImageIcon("src/Sprites/Sprite01.png");
-        icon[1] = new ImageIcon("src/Sprites/Sprite02.png");
-        icon[2] = new ImageIcon("src/Sprites/Sprite03.png");
-        icon[3] = new ImageIcon("src/Sprites/Sprite04.png");
-        icon[4] = new ImageIcon("src/Sprites/Sprite05.png");
-        icon[5] = new ImageIcon("src/Sprites/Sprite06.png");
-    }
-
-
     private void endState() {
         if(hiddenWord.checkGameState() && hiddenWord.checkWin()){
-            man.test.setText("You Win!");
+            man.setWinState("You Win!");
             for(JButton button: keys) {
                 button.setEnabled(false);
             }
         }
         else if(hiddenWord.checkGameState() && !hiddenWord.checkWin()) {
-            man.test.setText("You Lose!");
+            man.setWinState("You Lose!");
             for(JButton button: keys) {
                 button.setEnabled(false);
             }
@@ -90,7 +101,6 @@ class KeyboardLayout extends JPanel implements ActionListener {
         buttonState(specificButton);
         display.blanks.setText(hiddenWord.getBlank());
         endState();
-        repaint();
     }
 
 }
