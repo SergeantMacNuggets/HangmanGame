@@ -1,7 +1,11 @@
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 class Window extends JFrame implements ActionListener {
     Menu menu,menu1;
@@ -15,9 +19,24 @@ class Window extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(600,600);
         this.setResizable(false);
+        this.playSound(getClass().getResource("Sounds/Intro.wav"));
         this.add(menu);
         this.setVisible(true);
         this.pack();
+    }
+
+    private void playSound(URL sound) {
+        Clip clip = null;
+        try {
+            AudioInputStream audioIn;
+            audioIn = AudioSystem.getAudioInputStream(sound);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Intro.wav file cannot be found");
+            System.exit(0);
+        }
+        clip.start();
     }
 
     public void setCategories(Categories c){

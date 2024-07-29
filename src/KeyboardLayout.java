@@ -13,10 +13,9 @@ class KeyboardLayout extends JPanel implements ActionListener {
     private ActionListener keyListener;
     private GuessWord hiddenWord;
     private ImageIcon[] sprites;
+    private ImageIcon missingWordSprite;
     private WordDisplay display;
-    private AudioInputStream audioIn;
     private URL soundURL;
-    private Clip clip;
     private int y=1;
     private Man man;
     KeyboardLayout(GuessWord hiddenWord) {
@@ -32,13 +31,17 @@ class KeyboardLayout extends JPanel implements ActionListener {
         display.blanks.setText(hiddenWord.getBlank());
     }
 
-    private void playSound() {
+    private void playSound(URL sound) {
+        Clip clip = null;
         try {
-            audioIn = AudioSystem.getAudioInputStream(soundURL);
+            AudioInputStream audioIn;
+            audioIn = AudioSystem.getAudioInputStream(sound);
             clip = AudioSystem.getClip();
             clip.open(audioIn);
         } catch (Exception e) {
-            System.out.println("Audio file cannot be found");
+            JOptionPane.showMessageDialog(null, "Correct.wav file cannot be found");
+            System.exit(0);
+
         }
         clip.start();
     }
@@ -70,7 +73,7 @@ class KeyboardLayout extends JPanel implements ActionListener {
     private void buttonState(JButton b) {
         if(hiddenWord.validity(b)) {
             b.setBackground(Color.GREEN);
-            playSound();
+            playSound(soundURL);
             b.setEnabled(false);
         }
         else {
@@ -83,6 +86,9 @@ class KeyboardLayout extends JPanel implements ActionListener {
 
     private void endState() {
         if(hiddenWord.checkGameState() && hiddenWord.checkWin()){
+            missingWordSprite = new ImageIcon(getClass().getClassLoader().getResource("Sprites/"+
+                    hiddenWord.getClassWord()+"/"+hiddenWord.getSecretWord()+".png"));
+            man.background.setIcon(missingWordSprite);
             man.setWinState("You Win!");
             for(JButton button: keys) {
                 button.setEnabled(false);

@@ -1,11 +1,18 @@
+import javax.swing.*;
 import java.util.Random;
 
 abstract class Words {
+    ImageIcon[] sprites = new ImageIcon[5];
     public abstract String getWord();
+    public void setSprites() {
+
+    }
+
 }
 
 class Sport extends Words {
     private final String[] word = new String[5];
+    JLabel sportSprite;
     Sport() {
         word[0] = "BASKETBALL";
         word[1] = "VOLLEYBALL";

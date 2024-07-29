@@ -17,6 +17,13 @@ class GuessWord extends JPanel {
         replaceBlank = blank.toCharArray();
     }
 
+    public String getClassWord() {
+        return missingWord.getClass().getSimpleName();
+    }
+    public String getSecretWord(){
+        return secretWord;
+    }
+
     private void blankWord() {
         for(int i=0; i<secretWord.length();i++) {
             blank += "-";

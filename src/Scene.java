@@ -38,9 +38,10 @@ class WordDisplay extends JPanel {
 }
 
 class Man extends JPanel {
-    ImageIcon[] icon;
+    private ImageIcon[] icon;
     JLabel background;
-    JLabel winState;
+    JLabel giraffe;
+    private JLabel winState;
     Man() {
         winState = new JLabel("");
         winState.setForeground(Color.white);
@@ -48,6 +49,8 @@ class Man extends JPanel {
         icon = new ImageIcon[7];
         setSprites();
         background = new JLabel();
+        giraffe = new JLabel();
+        giraffe.setIcon(new ImageIcon(getClass().getClassLoader().getResource("Sprites/Animals/GIRAFFE.png")));
         background.setIcon(icon[0]);
         this.setPreferredSize(new Dimension(600,200));
         this.setBackground(Color.BLACK);
@@ -56,13 +59,13 @@ class Man extends JPanel {
     }
 
     public void setSprites() {
-        icon[0] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite00.png"));
-        icon[1] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite01.png"));
-        icon[2] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite02.png"));
-        icon[3] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite03.png"));
-        icon[4] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite04.png"));
-        icon[5] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite05.png"));
-        icon[6] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite06.png"));
+        icon[0] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Background/Sprite00.png"));
+        icon[1] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Background/Sprite01.png"));
+        icon[2] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Background/Sprite02.png"));
+        icon[3] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Background/Sprite03.png"));
+        icon[4] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Background/Sprite04.png"));
+        icon[5] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Background/Sprite05.png"));
+        icon[6] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Background/Sprite06.png"));
     }
 
     public ImageIcon[] getSprites() {
