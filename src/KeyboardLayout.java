@@ -20,7 +20,7 @@ class KeyboardLayout extends JPanel implements ActionListener {
     private int y=1;
     private Man man;
     KeyboardLayout(GuessWord hiddenWord) {
-        soundURL = getClass().getResource("Sounds//Correct.wav");
+        soundURL = getClass().getResource("Sounds/Correct.wav");
         this.hiddenWord = hiddenWord;
         display = new WordDisplay();
         man = new Man();
