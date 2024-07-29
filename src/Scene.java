@@ -56,13 +56,13 @@ class Man extends JPanel {
     }
 
     public void setSprites() {
-        icon[0] = new ImageIcon("src/Sprites/Sprite00.png");
-        icon[1] = new ImageIcon("src/Sprites/Sprite01.png");
-        icon[2] = new ImageIcon("src/Sprites/Sprite02.png");
-        icon[3] = new ImageIcon("src/Sprites/Sprite03.png");
-        icon[4] = new ImageIcon("src/Sprites/Sprite04.png");
-        icon[5] = new ImageIcon("src/Sprites/Sprite05.png");
-        icon[6] = new ImageIcon("src/Sprites/Sprite06.png");
+        icon[0] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite00.png"));
+        icon[1] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite01.png"));
+        icon[2] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite02.png"));
+        icon[3] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite03.png"));
+        icon[4] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite04.png"));
+        icon[5] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite05.png"));
+        icon[6] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Sprite06.png"));
     }
 
     public ImageIcon[] getSprites() {

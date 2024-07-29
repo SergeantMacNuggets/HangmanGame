@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.sound.sampled.*;
 import java.io.File;
+import java.net.URL;
 
 class KeyboardLayout extends JPanel implements ActionListener {
     private final JButton[] keys = new JButton[26];
@@ -14,12 +15,12 @@ class KeyboardLayout extends JPanel implements ActionListener {
     private ImageIcon[] sprites;
     private WordDisplay display;
     private AudioInputStream audioIn;
-    private final File sound;
+    private URL soundURL;
     private Clip clip;
     private int y=1;
     private Man man;
     KeyboardLayout(GuessWord hiddenWord) {
-        sound = new File("src/Sounds/Correct.wav");
+        soundURL = getClass().getResource("Sounds//Correct.wav");
         this.hiddenWord = hiddenWord;
         display = new WordDisplay();
         man = new Man();
@@ -33,7 +34,7 @@ class KeyboardLayout extends JPanel implements ActionListener {
 
     private void playSound() {
         try {
-            audioIn = AudioSystem.getAudioInputStream(sound);
+            audioIn = AudioSystem.getAudioInputStream(soundURL);
             clip = AudioSystem.getClip();
             clip.open(audioIn);
         } catch (Exception e) {
