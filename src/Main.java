@@ -8,9 +8,9 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 
 class Window extends JFrame implements ActionListener {
-    Menu menu,menu1;
-    Scene scene;
-    Categories category;
+    private Menu menu,menu1;
+    private Scene scene;
+    private Categories category;
     Window() {
         this.setTitle("Hangman");
         this.setIconImage(new ImageIcon("src/BackgroundSprites/2230897.png").getImage());
@@ -39,13 +39,13 @@ class Window extends JFrame implements ActionListener {
         clip.start();
     }
 
-    public void setCategories(Categories c){
+    private void setCategories(Categories c){
         for(JButton button: c.getButtons()) {
             button.addActionListener(this);
         }
     }
 
-    public void addRemove(Scene scene) {
+    private void addRemove(Scene scene) {
         scene.getQuit().addActionListener(this);
         getContentPane().removeAll();
         getContentPane().add(scene);

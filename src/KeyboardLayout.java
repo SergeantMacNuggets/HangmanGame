@@ -86,8 +86,12 @@ class KeyboardLayout extends JPanel implements ActionListener {
 
     private void endState() {
         if(hiddenWord.checkGameState() && hiddenWord.checkWin()){
-            missingWordSprite = new ImageIcon(getClass().getClassLoader().getResource("Sprites/"+
-                    hiddenWord.getClassWord()+"/"+hiddenWord.getSecretWord()+".png"));
+            try {
+                missingWordSprite = new ImageIcon(getClass().getClassLoader().getResource("Sprites/" +
+                        hiddenWord.getClassWord() + "/" + hiddenWord.getSecretWord() + ".png"));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, hiddenWord.getSecretWord() + ".png file cannot be found");
+            }
             man.background.setIcon(missingWordSprite);
             man.setWinState("You Win!");
             for(JButton button: keys) {

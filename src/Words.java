@@ -2,12 +2,7 @@ import javax.swing.*;
 import java.util.Random;
 
 abstract class Words {
-    ImageIcon[] sprites = new ImageIcon[5];
     public abstract String getWord();
-    public void setSprites() {
-
-    }
-
 }
 
 class Sport extends Words {

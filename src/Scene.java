@@ -2,9 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 
 class Scene extends JPanel{
-    KeyboardLayout userInput;
-    JButton quit;
-    GuessWord word;
+    private KeyboardLayout userInput;
+    private JButton quit;
+    private GuessWord word;
     Scene(Words w) {
         word = new GuessWord(w);
         quit = new JButton("X");
@@ -40,17 +40,19 @@ class WordDisplay extends JPanel {
 class Man extends JPanel {
     private ImageIcon[] icon;
     JLabel background;
-    JLabel giraffe;
     private JLabel winState;
     Man() {
         winState = new JLabel("");
         winState.setForeground(Color.white);
         winState.setFont(new Font("Arial", Font.BOLD,23));
         icon = new ImageIcon[7];
-        setSprites();
+        try {
+            setSprites();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Sprites file are missing in the folder");
+            System.exit(0);
+        }
         background = new JLabel();
-        giraffe = new JLabel();
-        giraffe.setIcon(new ImageIcon(getClass().getClassLoader().getResource("Sprites/Animals/GIRAFFE.png")));
         background.setIcon(icon[0]);
         this.setPreferredSize(new Dimension(600,200));
         this.setBackground(Color.BLACK);
@@ -58,7 +60,7 @@ class Man extends JPanel {
         this.add(background);
     }
 
-    public void setSprites() {
+    public void setSprites() throws Exception{
         icon[0] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Background/Sprite00.png"));
         icon[1] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Background/Sprite01.png"));
         icon[2] = new ImageIcon(getClass().getClassLoader().getResource("Sprites/Background/Sprite02.png"));

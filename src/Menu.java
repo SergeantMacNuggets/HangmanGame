@@ -6,9 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Menu extends JPanel {
-    JButton play;
-    JButton quit;
-    JLabel title;
+    private JButton play;
+    private JButton quit;
+    private JLabel title;
     Menu() {
         title = new JLabel("Hangman");
         play = new JButton("Play");
@@ -42,8 +42,8 @@ public class Menu extends JPanel {
 }
 
 class Categories extends JPanel {
-    JLabel option;
-    JButton[] choice;
+    private JLabel option;
+    private JButton[] choice;
     Categories() {
         choice = new JButton[5];
         option = new JLabel("Choose Categories:");
@@ -61,12 +61,12 @@ class Categories extends JPanel {
         return choice;
     }
 
-    public JButton setButtons(String s, int x, int y) {
+    private JButton setButtons(String s, int x, int y) {
         JButton b = new JButton(s);
         b.setBounds(x,y,80,30);
         return b;
     }
-    public void addButtons() {
+    private void addButtons() {
         int y = 120;
         String[] name = {"Sport", "Food", "Country", "Job", "Animals"};
         for(int i=0,x=30; i<choice.length;x+=100,i++) {
