@@ -16,12 +16,11 @@ class GuessWord extends JPanel {
      * Initializes the secret word and prepares the blank representation.
      * @param missingWord The {@link Words} object containing the secret word.
      */
-
     GuessWord(Words missingWord) {
         this.missingWord = missingWord;
         blank = "";
         mistakes = 6;
-        secretWord = missingWord.getWord();
+        secretWord = missingWord.getWord().toUpperCase();
         this.blankWord();
         replaceBlank = blank.toCharArray();
     }
