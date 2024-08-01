@@ -25,7 +25,7 @@ class Window extends JFrame implements ActionListener {
      */
     Window() {
         this.setTitle("Hangman");
-        this.setIconImage(new ImageIcon("src/BackgroundSprites/2230897.png").getImage());
+        this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("Sprites/Icon/icon.png")).getImage());
         menu = new Menu();
         menu.playButton().addActionListener(this);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
