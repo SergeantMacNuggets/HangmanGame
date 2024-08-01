@@ -4,11 +4,21 @@ import javax.swing.JLabel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Represents the main menu of the application.
+ * This panel provides options to start the game or exit the application.
+ * It contains a title label, a "Play" button, and an "Exit" button.
+ */
 public class Menu extends JPanel {
     private JButton play;
     private JButton quit;
     private JLabel title;
+    /**
+     * Constructs a new Menu panel.
+     * Initializes and configures the title label, play button, and quit button.
+     * Sets layout, dimensions, and background color for the panel.
+     * Adds an action listener to the quit button to exit the application when clicked.
+     */
     Menu() {
         title = new JLabel("Hangman");
         play = new JButton("Play");
@@ -35,15 +45,28 @@ public class Menu extends JPanel {
         this.add(play);
         this.add(quit);
     }
-
+    /**
+     * Returns the "Play" button.
+     * @return the JButton used to start the game.
+     */
     public JButton playButton() {
         return play;
     }
 }
-
+/**
+ * Represents the categories selection panel.
+ * This panel displays a list of category options for the user to choose from.
+ * It contains a label and a set of buttons representing different categories.
+ */
 class Categories extends JPanel {
     private JLabel option;
     private JButton[] choice;
+    /**
+     * Constructs a new Categories panel.
+     * Initializes and configures the option label and buttons.
+     * Sets layout, dimensions, and background color for the panel.
+     * Calls a method to add buttons to the panel.
+     */
     Categories() {
         choice = new JButton[5];
         option = new JLabel("Choose Categories:");
@@ -56,16 +79,29 @@ class Categories extends JPanel {
         addButtons();
         this.add(option);
     }
-
+    /**
+     * Returns an array of category buttons.
+     * @return an array of JButtons representing category options.
+     */
     public JButton[] getButtons() {
         return choice;
     }
-
+    /**
+     * Creates a JButton with the specified label and position.
+     * @param s the label for the button.
+     * @param x the x-coordinate for the button's position.
+     * @param y the y-coordinate for the button's position.
+     * @return a JButton configured with the specified label and position.
+     */
     private JButton setButtons(String s, int x, int y) {
         JButton b = new JButton(s);
         b.setBounds(x,y,80,30);
         return b;
     }
+    /**
+     * Initializes and adds category buttons to the panel.
+     * Configures the appearance of each button and places them on the panel.
+     */
     private void addButtons() {
         int y = 120;
         String[] name = {"Sport", "Food", "Country", "Job", "Animals"};
@@ -75,6 +111,5 @@ class Categories extends JPanel {
             choice[i].setBackground(Color.DARK_GRAY);
             this.add(choice[i]);
         }
-
     }
 }
